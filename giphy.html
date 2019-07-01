@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Giphy cat</title>
+</head>
+
+<body>
+    <button id="cat-button">Magical cat button</button>
+    <div id="cat-display"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    
+    $("#cat-button").on("click", function(event){
+
+        var queryURL= "https://api.giphy.com/v1/gifs/random?api_key=BkaUZZWcFij6J7AoQj3WtPb1R2p9O6V9&tag=cats";
+        $.ajax({
+            url: queryURL,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+            var imgURL = response.data.image_original_url;
+
+            var catImg = $("<img>");
+            catImg.attr("src",imgURL);
+            catImg.attr("alt","cat image");
+
+            $("#cat-display").prepend(catImg);
+        });
+    });
+    </script>
+</body>
+</html>
